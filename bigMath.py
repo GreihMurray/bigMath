@@ -49,6 +49,29 @@ def carryVal(number):
     else:
         return 0
 
+def bigAdder(firstNum, secondNum):
+    added = []
+    result = []
+
+    if len(firstNum) > len(secondNum):
+        carriedVal = 0
+        for i in range (0, len(secondNum)):
+            added.append(int(firstNum[i]) + int(secondNum[i]) + int(carriedVal))
+            carriedVal = carryVal((int(secondNum[i])+int(firstNum[i])))
+        for i in range (len(secondNum), len(firstNum)):
+            added.append(int(firstNum[i]) + carriedVal)
+            carriedVal = 0
+    elif len(firstNum) < len(secondNum):
+        carriedVal = 0
+        for i in range (0, len(firstNum)):
+
+            added.append(int(firstNum[i]) + int(secondNum[i]) + int(carriedVal))
+            carriedVal = carryVal((secondNum[i]+firstNum[i]))
+        for i in range (len(firstNum), len(secondNum)):
+            added.append(secondNum[i] + carriedVal)
+            carriedVal = 0
+    return added
+
 def bigAdd(firstNumber, firstExponent, secondNumber, secondExponent):
     firstNumList = convertToDecimal(firstNumber, firstExponent)
     secondNumList = convertToDecimal(secondNumber, secondExponent)
@@ -82,9 +105,34 @@ def bigAdd(firstNumber, firstExponent, secondNumber, secondExponent):
 
     printResults(result)
 
-def bigMultiply(number, exponent):
-    print("multiply")
+def bigMultiply(firstNumber, firstExponent, secondNumber, secondExponent):
+    firstNumList = convertToDecimal(firstNumber, firstExponent)
+    secondNumList = convertToDecimal(secondNumber, secondExponent)
 
+    currentValue = []
+    holdToAdd = []
+    result = []
+    incrementer = 0
+    carriedVal = 0
+
+    reversedFirstNumList = reverseList(firstNumList)
+    reversedSecondNumList = reverseList(secondNumList)
+
+    if len(reversedFirstNumList) > len(reversedSecondNumList):
+        for digit in reversedSecondNumList:
+            for otherDigit in reversedFirstNumList:
+                stringMultiplied = str((otherDigit * digit) + carriedVal)
+                currentValue.append(stringMultiplied[len(stringMultiplied)-1])
+                carriedVal = carryVal(otherDigit * digit)
+
+            for i in range(0, incrementer):
+                currentValue.append(0)
+
+            holdToAdd = bigAdder(currentValue, holdToAdd)
+            print("HoldToAdd", holdToAdd)
+            incrementer = incrementer + 1
+        result = reverseList(holdToAdd)
+        printResults(result)
 def main():
     while(True):
         print("Please enter first number (Without exponent): ")
