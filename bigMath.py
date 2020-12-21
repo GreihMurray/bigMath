@@ -1,3 +1,14 @@
+def reverseList(passedIn):
+    reversedList = []
+    for i in reversed(passedIn):
+        reversedList.append(i)
+    return reversedList
+
+def printResults(passedIn):
+    for i in passedIn:
+        print(i, end="")
+    print(" ")
+
 def convertToDecimal(number, exponent):
     numArray = []
 
@@ -39,22 +50,37 @@ def carryVal(number):
         return 0
 
 def bigAdd(firstNumber, firstExponent, secondNumber, secondExponent):
-    firstNumArray = convertToDecimal(firstNumber, firstExponent)
-    secondNumArray = convertToDecimal(secondNumber, secondExponent)
+    firstNumList = convertToDecimal(firstNumber, firstExponent)
+    secondNumList = convertToDecimal(secondNumber, secondExponent)
     added = []
+    result = []
 
-    if len(firstNumArray) > len(secondNumArray):
-        carryVal = 0
-        for i in range (0, len(secondNumArray)):
-            print('thing')
-            reversedFirstNumArray = reversed(firstNumArray)
-            print(reversedFirstNumArray)
-            reversedSecondNumArray = reversed(secondNumArray)
-            print(reversedSecondNumArray)
-            added.append(reversedFirstNumArray[i] + reversedSecondNumArray[i] + carryVal)
-            carryVal = carryVal((reversedSecondNumArray[i]+reversedFirstNumArray[i]))
+    if len(firstNumList) > len(secondNumList):
+        carriedVal = 0
+        for i in range (0, len(secondNumList)):
+            reversedFirstNumList = reverseList(firstNumList)
+            reversedSecondNumList = reverseList(secondNumList)
 
-    print(added)
+            added.append(reversedFirstNumList[i] + reversedSecondNumList[i] + carriedVal)
+            carriedVal = carryVal((reversedSecondNumList[i]+reversedFirstNumList[i]))
+        for i in range (len(secondNumList), len(firstNumList)):
+            added.append(reversedFirstNumList[i] + carriedVal)
+            carriedVal = 0
+    elif len(firstNumList) < len(secondNumList):
+        carriedVal = 0
+        for i in range (0, len(firstNumList)):
+            reversedFirstNumList = reverseList(firstNumList)
+            reversedSecondNumList = reverseList(secondNumList)
+
+            added.append(reversedFirstNumList[i] + reversedSecondNumList[i] + carriedVal)
+            carriedVal = carryVal((reversedSecondNumList[i]+reversedFirstNumList[i]))
+        for i in range (len(firstNumList), len(secondNumList)):
+            added.append(reversedSecondNumList[i] + carriedVal)
+            carriedVal = 0
+
+    result = reverseList(added)
+
+    printResults(result)
 
 def bigMultiply(number, exponent):
     print("multiply")
