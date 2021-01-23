@@ -118,15 +118,21 @@ def bigMultiply(firstNumber, firstExponent, secondNumber, secondExponent):
     reversedFirstNumList = reverseList(firstNumList)
     reversedSecondNumList = reverseList(secondNumList)
 
+    print(reversedFirstNumList)
+    print(reversedSecondNumList)
+
     if len(reversedFirstNumList) > len(reversedSecondNumList):
         for digit in reversedSecondNumList:
+            currentValue = []
             for otherDigit in reversedFirstNumList:
                 stringMultiplied = str((otherDigit * digit) + carriedVal)
                 currentValue.append(stringMultiplied[len(stringMultiplied)-1])
                 carriedVal = carryVal(otherDigit * digit)
 
             for i in range(0, incrementer):
-                currentValue.append(0)
+                currentValue.insert(0, 0)
+
+            print("Cur Val", currentValue)
 
             holdToAdd = bigAdder(currentValue, holdToAdd)
             print("HoldToAdd", holdToAdd)
