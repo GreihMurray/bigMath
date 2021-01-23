@@ -56,7 +56,13 @@ def bigAdder(firstNum, secondNum):
     if len(firstNum) > len(secondNum):
         carriedVal = 0
         for i in range (0, len(secondNum)):
-            added.append(int(firstNum[i]) + int(secondNum[i]) + int(carriedVal))
+            holdingVal = int(firstNum[i]) + int(secondNum[i]) + int(carriedVal)
+
+            if (len(str(holdingVal)) > 1):
+                added.append(int(str(holdingVal)[1]))
+            else:
+                added.append(holdingVal)
+
             carriedVal = carryVal((int(secondNum[i])+int(firstNum[i])))
         for i in range (len(secondNum), len(firstNum)):
             added.append(int(firstNum[i]) + carriedVal)
@@ -64,8 +70,13 @@ def bigAdder(firstNum, secondNum):
     elif len(firstNum) < len(secondNum):
         carriedVal = 0
         for i in range (0, len(firstNum)):
+            holdingVal = int(firstNum[i]) + int(secondNum[i]) + int(carriedVal)
 
-            added.append(int(firstNum[i]) + int(secondNum[i]) + int(carriedVal))
+            if(len(str(holdingVal)) > 1):
+                added.append(int(str(holdingVal)[1]))
+            else:
+                added.append(holdingVal)
+
             carriedVal = carryVal((secondNum[i]+firstNum[i]))
         for i in range (len(firstNum), len(secondNum)):
             added.append(secondNum[i] + carriedVal)
@@ -84,7 +95,14 @@ def bigAdd(firstNumber, firstExponent, secondNumber, secondExponent):
             reversedFirstNumList = reverseList(firstNumList)
             reversedSecondNumList = reverseList(secondNumList)
 
-            added.append(reversedFirstNumList[i] + reversedSecondNumList[i] + carriedVal)
+            holdingVal = reversedFirstNumList[i] + reversedSecondNumList[i] + carriedVal
+
+            if(len(str(holdingVal)) > 1):
+                added.append(int(str(holdingVal)[1]))
+            else:
+                added.append(holdingVal)
+
+            print(added)
             carriedVal = carryVal((reversedSecondNumList[i]+reversedFirstNumList[i]))
         for i in range (len(secondNumList), len(firstNumList)):
             added.append(reversedFirstNumList[i] + carriedVal)
@@ -95,7 +113,13 @@ def bigAdd(firstNumber, firstExponent, secondNumber, secondExponent):
             reversedFirstNumList = reverseList(firstNumList)
             reversedSecondNumList = reverseList(secondNumList)
 
-            added.append(reversedFirstNumList[i] + reversedSecondNumList[i] + carriedVal)
+            holdingVal = reversedFirstNumList[i] + reversedSecondNumList[i] + carriedVal
+
+            if (len(str(holdingVal)) > 1):
+                added.append(int(str(holdingVal)[1]))
+            else:
+                added.append(holdingVal)
+
             carriedVal = carryVal((reversedSecondNumList[i]+reversedFirstNumList[i]))
         for i in range (len(firstNumList), len(secondNumList)):
             added.append(reversedSecondNumList[i] + carriedVal)
