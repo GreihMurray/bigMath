@@ -143,22 +143,16 @@ def bigMultiply(firstNumber, firstExponent, secondNumber, secondExponent):
     reversedFirstNumList = reverseList(firstNumList)
     reversedSecondNumList = reverseList(secondNumList)
 
-    print(reversedFirstNumList)
-    print(reversedSecondNumList)
-
     if len(reversedFirstNumList) > len(reversedSecondNumList):
         for digit in reversedSecondNumList:
             spotInList = 0
             currentValue = []
             carriedVal = 0
             for otherDigit in reversedFirstNumList:
-                print("Others", otherDigit, "*****", digit)
                 stringMultiplied = str((otherDigit * digit) + carriedVal)
-                print(stringMultiplied)
                 currentValue.append(stringMultiplied[len(stringMultiplied)-1])
                 heldVal = (otherDigit * digit) + carriedVal
 
-                print("Checking", spotInList, "/////", len(reversedFirstNumList)-1)
 
                 if(spotInList == len(reversedFirstNumList) - 1):
                     carriedVal = heldVal
@@ -166,16 +160,38 @@ def bigMultiply(firstNumber, firstExponent, secondNumber, secondExponent):
                 else:
                     carriedVal = int(str(heldVal)[0])
 
-                print("CarVal", carriedVal)
                 spotInList = spotInList + 1
 
             for i in range(0, incrementer):
                 currentValue.insert(0, 0)
 
-            print("Cur Val", currentValue)
+            holdToAdd = bigAdder(currentValue, holdToAdd)
+            incrementer = incrementer + 1
+        result = reverseList(holdToAdd)
+        printResults(result)
+    elif len(reversedFirstNumList) < len(reversedSecondNumList):
+        for digit in reversedFirstNumList:
+            spotInList = 0
+            currentValue = []
+            carriedVal = 0
+            for otherDigit in reversedSecondNumList:
+                stringMultiplied = str((otherDigit * digit) + carriedVal)
+                currentValue.append(stringMultiplied[len(stringMultiplied)-1])
+                heldVal = (otherDigit * digit) + carriedVal
+
+
+                if(spotInList == len(reversedSecondNumList) - 1):
+                    carriedVal = heldVal
+                    currentValue.append(int(str(heldVal)[0]))
+                else:
+                    carriedVal = int(str(heldVal)[0])
+
+                spotInList = spotInList + 1
+
+            for i in range(0, incrementer):
+                currentValue.insert(0, 0)
 
             holdToAdd = bigAdder(currentValue, holdToAdd)
-            print("HoldToAdd", holdToAdd)
             incrementer = incrementer + 1
         result = reverseList(holdToAdd)
         printResults(result)
