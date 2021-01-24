@@ -138,6 +138,7 @@ def bigMultiply(firstNumber, firstExponent, secondNumber, secondExponent):
     result = []
     incrementer = 0
     carriedVal = 0
+    spotInList = 0
 
     reversedFirstNumList = reverseList(firstNumList)
     reversedSecondNumList = reverseList(secondNumList)
@@ -147,12 +148,24 @@ def bigMultiply(firstNumber, firstExponent, secondNumber, secondExponent):
 
     if len(reversedFirstNumList) > len(reversedSecondNumList):
         for digit in reversedSecondNumList:
+            spotInList = 0
             currentValue = []
             for otherDigit in reversedFirstNumList:
                 stringMultiplied = str((otherDigit * digit) + carriedVal)
                 currentValue.append(stringMultiplied[len(stringMultiplied)-1])
-                carriedVal = carryVal(otherDigit * digit)
+                heldVal = (otherDigit * digit) + carriedVal
 
+                print("Checking", spotInList, "/////", len(reversedFirstNumList)-1)
+
+                if(spotInList == len(reversedFirstNumList) - 1):
+                    carriedVal = heldVal
+                    currentValue.append(int(str(heldVal)[0]))
+                else:
+                    carriedVal = int(str(heldVal)[0])
+
+                print("CarVal", carriedVal)
+                spotInList = spotInList + 1
+                
             for i in range(0, incrementer):
                 currentValue.insert(0, 0)
 
