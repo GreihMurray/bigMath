@@ -102,7 +102,6 @@ def bigAdd(firstNumber, firstExponent, secondNumber, secondExponent):
             else:
                 added.append(holdingVal)
 
-            print(added)
             carriedVal = carryVal((reversedSecondNumList[i]+reversedFirstNumList[i]))
         for i in range (len(secondNumList), len(firstNumList)):
             added.append(reversedFirstNumList[i] + carriedVal)
@@ -195,6 +194,7 @@ def bigMultiply(firstNumber, firstExponent, secondNumber, secondExponent):
             incrementer = incrementer + 1
         result = reverseList(holdToAdd)
         printResults(result)
+        
 def main():
     while(True):
         print("Please enter first number (Without exponent): ")
