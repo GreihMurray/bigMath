@@ -212,6 +212,23 @@ def isGreaterThan(firstNumber, firstExponent, secondNumber, secondExponent):
             else:
                 continue
 
+def isLessThan(firstNumber, firstExponenet, secondNumber, secondExponent):
+    firstNumList = convertToDecimal(firstNumber, firstExponenet)
+    secondNumList = convertToDecimal(secondNumber, secondExponent)
+
+    if(len(firstNumList) > len(secondNumList)):
+        return False
+    elif(len(secondNumList) > len(firstNumList)):
+        return True
+    else:
+        for i in range(0, len(firstNumList)):
+            if(firstNumList[i] > secondNumList[i]):
+                return False
+            elif(secondNumList[i] > firstNumList[i]):
+                return True
+            else:
+                continue
+
 def main():
     while(True):
         print("Please enter first number (Without exponent): ")
@@ -224,7 +241,7 @@ def main():
         print("Please enter second exponenet: ")
         secondExponent = input()
 
-        print("Choose operation (0. Quit, 1. Addition, 2. Multiplication, 5. Greater Than): ")
+        print("Choose operation (0. Quit, 1. Addition, 2. Multiplication, 5. Greater Than, 6. Less Than): ")
         operation = input()
 
         if(operation == '1'):
@@ -234,6 +251,9 @@ def main():
         elif(operation == '5'):
             greater = isGreaterThan(firstNumber, firstExponent, secondNumber, secondExponent)
             print(greater)
+        elif(operation == '6'):
+            less = isLessThan((firstNumber, firstExponent, secondNumber, secondExponent))
+            print(less)
         elif(operation == '0'):
             break
         else:
