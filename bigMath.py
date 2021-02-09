@@ -252,20 +252,26 @@ def isGreaterThan(firstNumber, firstExponent, secondNumber, secondExponent):
     firstNumList = convertToDecimal(firstNumber, firstExponent)
     secondNumList = convertToDecimal(secondNumber, secondExponent)
 
+    result = False
+
     #If one is longer than the other, it is greater (Negatives not quite accounted for)
     if (len(firstNumList) > len(secondNumList)):
-        return True
+        result = True
     elif (len(secondNumList) > len(firstNumList)):
-        return False
+        result = False
     #Goes through element by element to determine which is greater
     else:
         for i in range(0, len(firstNumList)):
             if (firstNumList[i] > secondNumList[i]):
-                return True
+                result = True
+                break
             elif (secondNumList[i] > firstNumList[i]):
-                return False
+                result = False
+                break
             else:
                 continue
+    # Sends result to printResults
+    printResults(result)
 
 # Determines if the first number is less than the second
 # Accepts two numbers and two integers
@@ -274,20 +280,50 @@ def isLessThan(firstNumber, firstExponenet, secondNumber, secondExponent):
     firstNumList = convertToDecimal(firstNumber, firstExponenet)
     secondNumList = convertToDecimal(secondNumber, secondExponent)
 
+    result = True
+
     # If one list is shorter, it is less than (Not quite accounting for negatives)
     if (len(firstNumList) > len(secondNumList)):
-        return False
+        result = False
     elif (len(secondNumList) > len(firstNumList)):
-        return True
+        result = True
     # Goes element by element to see which is less than
     else:
         for i in range(0, len(firstNumList)):
             if (firstNumList[i] > secondNumList[i]):
-                return False
+                result = False
+                break
             elif (secondNumList[i] > firstNumList[i]):
-                return True
+                result = True
+                break
             else:
                 continue
+    # Sends result to printResults
+    printResults(result)
+
+# Determines if the numbers are equal
+# Accepts two numbers and two exponents
+def isEqual(firstNumber, firstExponenet, secondNumber, secondExponent):
+    #Converts numbers and exponents to corresponding lists
+    firstNumList = convertToDecimal(firstNumber, firstExponenet)
+    secondNumList = convertToDecimal(secondNumber, secondExponent)
+
+    result = True
+
+    # If the lists are not the same size, sets result to False
+    if(len(firstNumList) > len(secondNumList)):
+        result = False
+    elif(len(secondNumList) > len(firstNumList)):
+        result = False
+    else:
+        # Checks each element, if any are not equal sets result to false and breaks
+        for i in range(0, len(firstNumList)):
+            if(firstNumList[i] != secondNumList[i]):
+                result = False
+                break
+
+    # Calls print results and passes the result
+    printResults(result)
 
 # Main method, takes numbers and exponents via terminal along with desired operation
 def main():
@@ -311,11 +347,9 @@ def main():
         elif (operation == '2'):
             bigMultiply(firstNumber, firstExponent, secondNumber, secondExponent)
         elif (operation == '5'):
-            greater = isGreaterThan(firstNumber, firstExponent, secondNumber, secondExponent)
-            print(greater)
+            isGreaterThan(firstNumber, firstExponent, secondNumber, secondExponent)
         elif (operation == '6'):
-            less = isLessThan((firstNumber, firstExponent, secondNumber, secondExponent))
-            print(less)
+            isLessThan((firstNumber, firstExponent, secondNumber, secondExponent))
         elif (operation == '0'):
             break
         else:
