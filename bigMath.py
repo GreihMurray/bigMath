@@ -194,7 +194,24 @@ def bigMultiply(firstNumber, firstExponent, secondNumber, secondExponent):
             incrementer = incrementer + 1
         result = reverseList(holdToAdd)
         printResults(result)
-        
+
+def isGreaterThan(firstNumber, firstExponent, secondNumber, secondExponent):
+    firstNumList = convertToDecimal(firstNumber, firstExponent)
+    secondNumList = convertToDecimal(secondNumber, secondExponent)
+
+    if(len(firstNumList) > len(secondNumList)):
+        return True
+    elif(len(secondNumList) > len(firstNumList)):
+        return False
+    else:
+        for i in range(0, len(firstNumList)):
+            if(firstNumList[i] > secondNumList[i]):
+                return True
+            elif(secondNumList[i] > firstNumList[i]):
+                return False
+            else:
+                continue
+
 def main():
     while(True):
         print("Please enter first number (Without exponent): ")
@@ -207,13 +224,16 @@ def main():
         print("Please enter second exponenet: ")
         secondExponent = input()
 
-        print("Choose operation (0. Quit, 1. Addition, 2. Multiplication): ")
+        print("Choose operation (0. Quit, 1. Addition, 2. Multiplication, 5. Greater Than): ")
         operation = input()
 
         if(operation == '1'):
             bigAdd(firstNumber, firstExponent, secondNumber, secondExponent)
         elif(operation == '2'):
             bigMultiply(firstNumber, firstExponent, secondNumber, secondExponent)
+        elif(operation == '5'):
+            greater = isGreaterThan(firstNumber, firstExponent, secondNumber, secondExponent)
+            print(greater)
         elif(operation == '0'):
             break
         else:
