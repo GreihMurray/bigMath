@@ -6,6 +6,26 @@ def reverseList(passedIn):
         reversedList.append(i)
     return reversedList
 
+def printProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, length = 100, fill = '█', printEnd = ""):
+    """
+    Call in a loop to create terminal progress bar
+    @params:
+        iteration   - Required  : current iteration (Int)
+        total       - Required  : total iterations (Int)
+        prefix      - Optional  : prefix string (Str)
+        suffix      - Optional  : suffix string (Str)
+        decimals    - Optional  : positive number of decimals in percent complete (Int)
+        length      - Optional  : character length of bar (Int)
+        fill        - Optional  : bar fill character (Str)
+        printEnd    - Optional  : end character (e.g. "\r", "\r\n") (Str)
+    """
+    percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
+    filledLength = int(length * iteration // total)
+    bar = fill * filledLength + '-' * (length - filledLength)
+    print(f'\r{prefix} |{bar}| {percent}% {suffix}', end = printEnd)
+    # Print New Line on Complete
+    if iteration == total:
+        print()
 
 # Can be used to print results from other methods
 # Accepts list as argument
@@ -175,6 +195,7 @@ def bigMultiply(firstNumber, firstExponent, secondNumber, secondExponent):
     incrementer = 0
     carriedVal = 0
     spotInList = 0
+    increment = 0
 
     # Reverses lists for use in computations
     reversedFirstNumList = reverseList(firstNumList)
@@ -182,8 +203,12 @@ def bigMultiply(firstNumber, firstExponent, secondNumber, secondExponent):
 
     # Performs calculations based on which list is longer
     if len(reversedFirstNumList) > len(reversedSecondNumList):
-        # Multiplies each digit in the shorter list by each digit in the longer list efore moving on to the next digit
+        printProgressBar(0, len(reversedSecondNumList), prefix='Progress:', suffix='Complete', length=50)
+
+        # Multiplies each digit in the shorter list by each digit in the longer list before moving on to the next digit
         for digit in reversedSecondNumList:
+            printProgressBar(increment + 1, len(reversedSecondNumList), prefix='Progress:', suffix='Complete', length=50)
+            increment += 1
             spotInList = 0
             currentValue = []
             carriedVal = 0
@@ -213,13 +238,17 @@ def bigMultiply(firstNumber, firstExponent, secondNumber, secondExponent):
         # Sends the result to printResults
         printResults(result)
     elif len(reversedFirstNumList) < len(reversedSecondNumList):
+        printProgressBar(0, len(reversedFirstNumList), prefix='Progress:', suffix='Complete', length=50)
         # Multiplies each digit of the shorter list by each digit in the longer list before moving on
         for digit in reversedFirstNumList:
+            printProgressBar(increment + 1, len(reversedFirstNumList), prefix='Progress:', suffix='Complete', length=50)
+            increment += 1
             spotInList = 0
             currentValue = []
             carriedVal = 0
             # Actually performs the calculations
             for otherDigit in reversedSecondNumList:
+
                 stringMultiplied = str((otherDigit * digit) + carriedVal)
                 currentValue.append(stringMultiplied[len(stringMultiplied) - 1])
                 heldVal = (otherDigit * digit) + carriedVal
