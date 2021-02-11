@@ -244,20 +244,20 @@ def bigMultiply(firstNumber, firstExponent, secondNumber, secondExponent):
         # Sends the result to printResults
         printResults(result)
     elif len(reversedFirstNumList) < len(reversedSecondNumList):
-        printProgressBar(0, len(reversedFirstNumList), prefix='Progress:', suffix='Complete', length=50)
+        printProgressBar(0, (len(reversedFirstNumList) - zerosInListOne), prefix='Progress:', suffix='Complete', length=50)
         # Multiplies each digit of the shorter list by each digit in the longer list before moving on
-        for digit in reversedFirstNumList:
-            printProgressBar(increment + 1, len(reversedFirstNumList), prefix='Progress:', suffix='Complete', length=50)
+        for i in range (zerosInListOne-1, len(reversedFirstNumList)-1):
+            printProgressBar(increment + 1, (len(reversedFirstNumList) - zerosInListOne), prefix='Progress:', suffix='Complete', length=50)
             increment += 1
             spotInList = 0
             currentValue = []
             carriedVal = 0
             # Actually performs the calculations
-            for otherDigit in reversedSecondNumList:
+            for j in range (zerosInListTwo-1, len(reversedSecondNumList)-1):
 
-                stringMultiplied = str((otherDigit * digit) + carriedVal)
+                stringMultiplied = str((j * i) + carriedVal)
                 currentValue.append(stringMultiplied[len(stringMultiplied) - 1])
-                heldVal = (otherDigit * digit) + carriedVal
+                heldVal = (j * i) + carriedVal
 
                 # If at the end of the iteration, adds entire result to list, otherwise only adds last element
                 if (spotInList == len(reversedSecondNumList) - 1):
@@ -268,7 +268,7 @@ def bigMultiply(firstNumber, firstExponent, secondNumber, secondExponent):
 
                 spotInList = spotInList + 1
             # Used to add extra 0s to the end of the list (Magic zeros from elementary math)
-            for i in range(0, incrementer):
+            for k in range(0, (incrementer + zerosInListOne) + (zerosInListTwo -1)):
                 currentValue.insert(0, 0)
 
             # Used to add the results of each iteration
