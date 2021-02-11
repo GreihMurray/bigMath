@@ -189,6 +189,9 @@ def bigMultiply(firstNumber, firstExponent, secondNumber, secondExponent):
     firstNumList = convertToDecimal(firstNumber, firstExponent)
     secondNumList = convertToDecimal(secondNumber, secondExponent)
 
+    zerosInListOne = 0
+    zerosInListTwo = 0
+
     currentValue = []
     holdToAdd = []
     result = []
@@ -201,22 +204,25 @@ def bigMultiply(firstNumber, firstExponent, secondNumber, secondExponent):
     reversedFirstNumList = reverseList(firstNumList)
     reversedSecondNumList = reverseList(secondNumList)
 
+    zerosInListOne = reversedFirstNumList.count(0)
+    zerosInListTwo = reversedSecondNumList.count(0)
+
     # Performs calculations based on which list is longer
     if len(reversedFirstNumList) > len(reversedSecondNumList):
-        printProgressBar(0, len(reversedSecondNumList), prefix='Progress:', suffix='Complete', length=50)
+        printProgressBar(0, (len(reversedSecondNumList) - zerosInListTwo), prefix='Progress:', suffix='Complete', length=50)
 
         # Multiplies each digit in the shorter list by each digit in the longer list before moving on to the next digit
-        for digit in reversedSecondNumList:
-            printProgressBar(increment + 1, len(reversedSecondNumList), prefix='Progress:', suffix='Complete', length=50)
+        for i in range (zerosInListTwo-1, len(reversedSecondNumList)-1):
+            printProgressBar(increment + 1, (len(reversedSecondNumList)-zerosInListTwo), prefix='Progress:', suffix='Complete', length=50)
             increment += 1
             spotInList = 0
             currentValue = []
             carriedVal = 0
             # Actually performing the calculations
-            for otherDigit in reversedFirstNumList:
-                stringMultiplied = str((otherDigit * digit) + carriedVal)
+            for j in range(zerosInListOne, len(reversedFirstNumList)):
+                stringMultiplied = str((j * i) + carriedVal)
                 currentValue.append(stringMultiplied[len(stringMultiplied) - 1])
-                heldVal = (otherDigit * digit) + carriedVal
+                heldVal = (j * i) + carriedVal
 
                 # If at the end of the calculation, append the entire result, otherwise just the last digit
                 if (spotInList == len(reversedFirstNumList) - 1):
@@ -228,7 +234,7 @@ def bigMultiply(firstNumber, firstExponent, secondNumber, secondExponent):
                 spotInList = spotInList + 1
 
             # Used to add extra 0s to the end of the list (Magic zeros from elementary math)
-            for i in range(0, incrementer):
+            for k in range(0, (incrementer + (zerosInListOne-1) + zerosInListTwo)):
                 currentValue.insert(0, 0)
             # Used to add the result of each iteration of the outer for loop together
             holdToAdd = bigAdder(currentValue, holdToAdd)
