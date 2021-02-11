@@ -219,7 +219,7 @@ def bigMultiply(firstNumber, firstExponent, secondNumber, secondExponent):
             currentValue = []
             carriedVal = 0
             # Actually performing the calculations
-            for j in range(zerosInListOne, len(reversedFirstNumList)):
+            for j in range(zerosInListOne-1, len(reversedFirstNumList)-1):
                 stringMultiplied = str((j * i) + carriedVal)
                 currentValue.append(stringMultiplied[len(stringMultiplied) - 1])
                 heldVal = (j * i) + carriedVal
