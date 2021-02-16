@@ -209,11 +209,11 @@ def bigMultiply(firstNumber, firstExponent, secondNumber, secondExponent):
 
     # Performs calculations based on which list is longer
     if len(reversedFirstNumList) > len(reversedSecondNumList):
-        printProgressBar(0, (len(reversedSecondNumList) - zerosInListTwo), prefix='Progress:', suffix='Complete', length=50)
+        printProgressBar(0, ((len(reversedSecondNumList) - zerosInListTwo) + 1), prefix='Progress:', suffix='Complete', length=50)
 
         # Multiplies each digit in the shorter list by each digit in the longer list before moving on to the next digit
         for i in range (zerosInListOne-1, len(reversedFirstNumList)):
-            printProgressBar(increment + 1, (len(reversedSecondNumList)-zerosInListTwo), prefix='Progress:', suffix='Complete', length=50)
+            printProgressBar(increment + 1, ((len(reversedSecondNumList) - zerosInListTwo) + 1), prefix='Progress:', suffix='Complete', length=50)
             increment += 1
             spotInList = zerosInListTwo
             currentValue = []
@@ -246,18 +246,18 @@ def bigMultiply(firstNumber, firstExponent, secondNumber, secondExponent):
     elif len(reversedFirstNumList) < len(reversedSecondNumList):
         printProgressBar(0, (len(reversedFirstNumList) - zerosInListOne), prefix='Progress:', suffix='Complete', length=50)
         # Multiplies each digit of the shorter list by each digit in the longer list before moving on
-        for i in range (zerosInListOne-1, len(reversedFirstNumList)-1):
+        for i in range (zerosInListTwo-1, len(reversedSecondNumList)):
             printProgressBar(increment + 1, (len(reversedFirstNumList) - zerosInListOne), prefix='Progress:', suffix='Complete', length=50)
             increment += 1
-            spotInList = 0
+            spotInList = zerosInListOne
             currentValue = []
             carriedVal = 0
             # Actually performs the calculations
-            for j in range (zerosInListTwo-1, len(reversedSecondNumList)-1):
+            for j in range (zerosInListOne-1, len(reversedFirstNumList)):
 
-                stringMultiplied = str((j * i) + carriedVal)
+                stringMultiplied = str((reversedFirstNumList[j] * reversedSecondNumList[i]) + carriedVal)
                 currentValue.append(stringMultiplied[len(stringMultiplied) - 1])
-                heldVal = (j * i) + carriedVal
+                heldVal = (reversedFirstNumList[j] * reversedSecondNumList[i]) + carriedVal
 
                 # If at the end of the iteration, adds entire result to list, otherwise only adds last element
                 if (spotInList == len(reversedSecondNumList) - 1):
@@ -268,7 +268,7 @@ def bigMultiply(firstNumber, firstExponent, secondNumber, secondExponent):
 
                 spotInList = spotInList + 1
             # Used to add extra 0s to the end of the list (Magic zeros from elementary math)
-            for k in range(0, (incrementer + zerosInListOne) + (zerosInListTwo -1)):
+            for k in range(0, (incrementer + zerosInListOne - 1) + (zerosInListTwo -1)):
                 currentValue.insert(0, 0)
 
             # Used to add the results of each iteration
