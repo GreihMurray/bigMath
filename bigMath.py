@@ -212,22 +212,21 @@ def bigMultiply(firstNumber, firstExponent, secondNumber, secondExponent):
         printProgressBar(0, (len(reversedSecondNumList) - zerosInListTwo), prefix='Progress:', suffix='Complete', length=50)
 
         # Multiplies each digit in the shorter list by each digit in the longer list before moving on to the next digit
-        for i in range (zerosInListTwo-1, len(reversedSecondNumList)-1):
+        for i in range (zerosInListOne-1, len(reversedFirstNumList)):
             printProgressBar(increment + 1, (len(reversedSecondNumList)-zerosInListTwo), prefix='Progress:', suffix='Complete', length=50)
             increment += 1
-            spotInList = 0
+            spotInList = zerosInListTwo
             currentValue = []
             carriedVal = 0
             # Actually performing the calculations
-            for j in range(zerosInListOne-1, len(reversedFirstNumList)-1):
-                stringMultiplied = str((reversedFirstNumList[j] * reversedSecondNumList[i]) + carriedVal)
+            for j in range(zerosInListTwo-1, len(reversedSecondNumList)):
+                stringMultiplied = str((reversedFirstNumList[i] * reversedSecondNumList[j]) + carriedVal)
                 currentValue.append(stringMultiplied[len(stringMultiplied) - 1])
-                heldVal = (reversedFirstNumList[j] * reversedSecondNumList[i]) + carriedVal
+                heldVal = (reversedFirstNumList[i] * reversedSecondNumList[j]) + carriedVal
 
                 # If at the end of the calculation, append the entire result, otherwise just the last digit
                 if (spotInList == len(reversedFirstNumList) - 1):
                     carriedVal = heldVal
-                    print(heldVal)
                     currentValue.append(int(str(heldVal)[0]))
                 else:
                     carriedVal = int(str(heldVal)[0])
@@ -235,11 +234,9 @@ def bigMultiply(firstNumber, firstExponent, secondNumber, secondExponent):
                 spotInList = spotInList + 1
 
             # Used to add extra 0s to the end of the list (Magic zeros from elementary math)
-            for k in range(0, (incrementer + (zerosInListOne-1) + zerosInListTwo)):
+            for k in range(0, (incrementer + (zerosInListOne-1) + zerosInListTwo)-1):
                 currentValue.insert(0, 0)
             # Used to add the result of each iteration of the outer for loop together
-            print(holdToAdd)
-            print(currentValue)
             holdToAdd = bigAdder(currentValue, holdToAdd)
             incrementer = incrementer + 1
         # Reverses the list so it is the right way around
