@@ -220,13 +220,14 @@ def bigMultiply(firstNumber, firstExponent, secondNumber, secondExponent):
             carriedVal = 0
             # Actually performing the calculations
             for j in range(zerosInListOne-1, len(reversedFirstNumList)-1):
-                stringMultiplied = str((j * i) + carriedVal)
+                stringMultiplied = str((reversedFirstNumList[j] * reversedSecondNumList[i]) + carriedVal)
                 currentValue.append(stringMultiplied[len(stringMultiplied) - 1])
-                heldVal = (j * i) + carriedVal
+                heldVal = (reversedFirstNumList[j] * reversedSecondNumList[i]) + carriedVal
 
                 # If at the end of the calculation, append the entire result, otherwise just the last digit
                 if (spotInList == len(reversedFirstNumList) - 1):
                     carriedVal = heldVal
+                    print(heldVal)
                     currentValue.append(int(str(heldVal)[0]))
                 else:
                     carriedVal = int(str(heldVal)[0])
@@ -237,6 +238,8 @@ def bigMultiply(firstNumber, firstExponent, secondNumber, secondExponent):
             for k in range(0, (incrementer + (zerosInListOne-1) + zerosInListTwo)):
                 currentValue.insert(0, 0)
             # Used to add the result of each iteration of the outer for loop together
+            print(holdToAdd)
+            print(currentValue)
             holdToAdd = bigAdder(currentValue, holdToAdd)
             incrementer = incrementer + 1
         # Reverses the list so it is the right way around
