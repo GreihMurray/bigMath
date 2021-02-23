@@ -209,11 +209,11 @@ def bigMultiply(firstNumber, firstExponent, secondNumber, secondExponent):
 
     # Performs calculations based on which list is longer
     if len(reversedFirstNumList) > len(reversedSecondNumList):
-        printProgressBar(0, ((len(reversedSecondNumList) - zerosInListTwo) + 1), prefix='Progress:', suffix='Complete', length=50)
+        printProgressBar(0, (len(reversedFirstNumList) - (zerosInListOne - 1)), prefix='Progress:', suffix='Complete', length=50)
 
         # Multiplies each digit in the shorter list by each digit in the longer list before moving on to the next digit
         for i in range (zerosInListOne-1, len(reversedFirstNumList)):
-            printProgressBar(increment + 1, ((len(reversedSecondNumList) - zerosInListTwo) + 1), prefix='Progress:', suffix='Complete', length=50)
+            printProgressBar(increment + 1, (len(reversedFirstNumList) - (zerosInListOne - 1)), prefix='Progress:', suffix='Complete', length=50)
             increment += 1
             spotInList = zerosInListTwo
             currentValue = []
@@ -244,10 +244,10 @@ def bigMultiply(firstNumber, firstExponent, secondNumber, secondExponent):
         # Sends the result to printResults
         printResults(result)
     elif len(reversedFirstNumList) < len(reversedSecondNumList):
-        printProgressBar(0, (len(reversedFirstNumList) - zerosInListOne), prefix='Progress:', suffix='Complete', length=50)
+        printProgressBar(0, (len(reversedSecondNumList) - (zerosInListTwo-1)), prefix='Progress:', suffix='Complete', length=50)
         # Multiplies each digit of the shorter list by each digit in the longer list before moving on
         for i in range (zerosInListTwo-1, len(reversedSecondNumList)):
-            printProgressBar(increment + 1, (len(reversedFirstNumList) - zerosInListOne), prefix='Progress:', suffix='Complete', length=50)
+            printProgressBar(increment + 1, (len(reversedSecondNumList) - (zerosInListTwo - 1)), prefix='Progress:', suffix='Complete', length=50)
             increment += 1
             spotInList = zerosInListOne
             currentValue = []
