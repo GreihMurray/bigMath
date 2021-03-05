@@ -360,24 +360,27 @@ def isEqual(firstNumber, firstExponenet, secondNumber, secondExponent):
     # Calls print results and passes the result
     printResults(result)
 
+# Handles division of large numbers
+# Accepts two numbers and two exponents
 def bigDivide(firstNumber, firstExponent, secondNumber, secondExponent):
+    #finds the location of the decimal point and the total number of digits after the decimal point for the first number
     firstDecimalIndex = firstNumber.find('.') + 1
     firstLengthAfterDecimal = len(firstNumber) - firstDecimalIndex
 
+    # finds the location of the decimal point and the total number of digits after the decimal point for the second number
     secondDecimalIndex = secondNumber.find('.') + 1
     secondLengthAfterDecimal = len(secondNumber) - secondDecimalIndex
 
+    # Finds the total number of zeros that would be present in each number
     zerosInOne = int(firstExponent) - firstLengthAfterDecimal
     zerosInTwo = int(secondExponent) - secondLengthAfterDecimal
 
-    lengthOfOne = len(firstNumber) + zerosInOne
-    lengthOfTwo = len(secondNumber) + zerosInTwo
-
+    # Removes the decimal from each
     firstNumber = int(firstNumber.replace('.', ''))
     secondNumber = int(secondNumber.replace('.', ''))
 
+    # Calculates the result of the modified numbers
     tempResult = firstNumber/secondNumber
-    difInZeros = 0
 
     resultDecimalIndex = 0
 
@@ -385,37 +388,42 @@ def bigDivide(firstNumber, firstExponent, secondNumber, secondExponent):
 
     tempResult = str(tempResult)
 
+    # Adds each element from the temp result to the result list
     for element in tempResult:
         result.append(element)
 
+    # If there is a decimal point in the temp result gets the lcation and removes it
     if(str(tempResult).find('.') != -1):
         resultDecimalIndex = str(tempResult).find('.') + 1
         tempResult = str(tempResult).replace('.', '')
 
+    # Determines which number has more zeros so it knows which way to move the decimal
     if(zerosInOne > zerosInTwo):
         result.remove('.')
+        # Determines the number of spots to move the decimal
         difInZeros = zerosInOne - zerosInTwo
         numOfMoves = difInZeros - (len(tempResult) - resultDecimalIndex)
 
-        print(numOfMoves, '//////////', (len(tempResult) - resultDecimalIndex))
-
+        # If the number of moves does not extend past the current result, adds the decimal in the right place
         if numOfMoves <= (len(tempResult) - resultDecimalIndex):
             result.insert((numOfMoves + resultDecimalIndex), '.')
+        # Adds extra zeros at the end to get the proper result
         for i in range (0, numOfMoves):
             result.append(0)
 
     elif(zerosInTwo > zerosInOne):
         result.remove('.')
+        # Determines how many spots to move the decimal
         difInZeros = zerosInTwo - zerosInOne
         numOfMoves = difInZeros + (resultDecimalIndex - 1)
 
-        print(numOfMoves, '//////////', (resultDecimalIndex))
-
+        # If the number of moves does not extend past the current result, adds the decimal in the proper place
         if (numOfMoves - resultDecimalIndex) <= 0:
             result.insert((resultDecimalIndex - numOfMoves), '.')
+        # Adds zeros to get right answer
         for i in range(0, numOfMoves - 1):
             result.insert(0, 0)
-
+    # Calls printResults in order to print the results
     printResults(result)
 
 # Main method, takes numbers and exponents via terminal along with desired operation
