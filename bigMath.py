@@ -381,10 +381,6 @@ def bigDivide(firstNumber, firstExponent, secondNumber, secondExponent):
 
     resultDecimalIndex = 0
 
-    if(str(tempResult).find('.') != -1):
-        resultDecimalIndex = str(tempResult).find('.') + 1
-        tempResult = int(str(tempResult).replace('.', ''))
-
     result = []
 
     tempResult = str(tempResult)
@@ -392,7 +388,12 @@ def bigDivide(firstNumber, firstExponent, secondNumber, secondExponent):
     for element in tempResult:
         result.append(element)
 
+    if(str(tempResult).find('.') != -1):
+        resultDecimalIndex = str(tempResult).find('.') + 1
+        tempResult = str(tempResult).replace('.', '')
+
     if(zerosInOne > zerosInTwo):
+        result.remove('.')
         difInZeros = zerosInOne - zerosInTwo
         numOfMoves = difInZeros - (len(tempResult) - resultDecimalIndex)
 
@@ -403,8 +404,17 @@ def bigDivide(firstNumber, firstExponent, secondNumber, secondExponent):
         for i in range (0, numOfMoves):
             result.append(0)
 
-    else:
+    elif(zerosInTwo > zerosInOne):
+        result.remove('.')
         difInZeros = zerosInTwo - zerosInOne
+        numOfMoves = difInZeros + (resultDecimalIndex - 1)
+
+        print(numOfMoves, '//////////', (resultDecimalIndex))
+
+        if (numOfMoves - resultDecimalIndex) <= 0:
+            result.insert((resultDecimalIndex - numOfMoves), '.')
+        for i in range(0, numOfMoves - 1):
+            result.insert(0, 0)
 
     printResults(result)
 
@@ -413,6 +423,7 @@ def main():
     while (True):
         print("Please enter first number (Without exponent): ")
         firstNumber = input()
+
         print("Please enter first exponenet: ")
         firstExponent = input()
 
