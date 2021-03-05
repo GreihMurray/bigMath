@@ -360,6 +360,54 @@ def isEqual(firstNumber, firstExponenet, secondNumber, secondExponent):
     # Calls print results and passes the result
     printResults(result)
 
+def bigDivide(firstNumber, firstExponent, secondNumber, secondExponent):
+    firstDecimalIndex = firstNumber.find('.') + 1
+    firstLengthAfterDecimal = len(firstNumber) - firstDecimalIndex
+
+    secondDecimalIndex = secondNumber.find('.') + 1
+    secondLengthAfterDecimal = len(secondNumber) - secondDecimalIndex
+
+    zerosInOne = int(firstExponent) - firstLengthAfterDecimal
+    zerosInTwo = int(secondExponent) - secondLengthAfterDecimal
+
+    lengthOfOne = len(firstNumber) + zerosInOne
+    lengthOfTwo = len(secondNumber) + zerosInTwo
+
+    firstNumber = int(firstNumber.replace('.', ''))
+    secondNumber = int(secondNumber.replace('.', ''))
+
+    tempResult = firstNumber/secondNumber
+    difInZeros = 0
+
+    resultDecimalIndex = 0
+
+    if(str(tempResult).find('.') != -1):
+        resultDecimalIndex = str(tempResult).find('.') + 1
+        tempResult = int(str(tempResult).replace('.', ''))
+
+    result = []
+
+    tempResult = str(tempResult)
+
+    for element in tempResult:
+        result.append(element)
+
+    if(zerosInOne > zerosInTwo):
+        difInZeros = zerosInOne - zerosInTwo
+        numOfMoves = difInZeros - (len(tempResult) - resultDecimalIndex)
+
+        print(numOfMoves, '//////////', (len(tempResult) - resultDecimalIndex))
+
+        if numOfMoves <= (len(tempResult) - resultDecimalIndex):
+            result.insert((numOfMoves + resultDecimalIndex), '.')
+        for i in range (0, numOfMoves):
+            result.append(0)
+
+    else:
+        difInZeros = zerosInTwo - zerosInOne
+
+    printResults(result)
+
 # Main method, takes numbers and exponents via terminal along with desired operation
 def main():
     while (True):
@@ -373,7 +421,7 @@ def main():
         print("Please enter second exponenet: ")
         secondExponent = input()
 
-        print("Choose operation (0. Quit, 1. Addition, 2. Multiplication, 5. Greater Than, 6. Less Than): ")
+        print("Choose operation (0. Quit, 1. Addition, 2. Multiplication, 5. Greater Than, 6. Less Than, 7. Division): ")
         operation = input()
 
         # Depending on operation, calls appropriate function
@@ -385,6 +433,8 @@ def main():
             isGreaterThan(firstNumber, firstExponent, secondNumber, secondExponent)
         elif (operation == '6'):
             isLessThan((firstNumber, firstExponent, secondNumber, secondExponent))
+        elif (operation == '7'):
+            bigDivide(firstNumber, firstExponent, secondNumber, secondExponent)
         elif (operation == '0'):
             break
         else:
