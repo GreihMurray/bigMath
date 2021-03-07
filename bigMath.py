@@ -179,7 +179,7 @@ def bigAdd(firstNumber, firstExponent, secondNumber, secondExponent):
     result = reverseList(added)
 
     # Sends the results to printResults method
-    printResults(result)
+    return result
 
 
 # Used for multiplication
@@ -277,7 +277,7 @@ def bigMultiply(firstNumber, firstExponent, secondNumber, secondExponent):
         # Reverses result so it is the right way around
         result = reverseList(holdToAdd)
         # Sends result to printResults
-        printResults(result)
+        return result
 
 
 # Determines if the first number is greater than the second
@@ -306,7 +306,7 @@ def isGreaterThan(firstNumber, firstExponent, secondNumber, secondExponent):
             else:
                 continue
     # Sends result to printResults
-    printResults(result)
+    return result
 
 # Determines if the first number is less than the second
 # Accepts two numbers and two integers
@@ -334,7 +334,7 @@ def isLessThan(firstNumber, firstExponenet, secondNumber, secondExponent):
             else:
                 continue
     # Sends result to printResults
-    printResults(result)
+    return result
 
 # Determines if the numbers are equal
 # Accepts two numbers and two exponents
@@ -358,7 +358,7 @@ def isEqual(firstNumber, firstExponenet, secondNumber, secondExponent):
                 break
 
     # Calls print results and passes the result
-    printResults(result)
+    return result
 
 # Handles division of large numbers
 # Accepts two numbers and two exponents
@@ -424,7 +424,7 @@ def bigDivide(firstNumber, firstExponent, secondNumber, secondExponent):
         for i in range(0, numOfMoves - 1):
             result.insert(0, 0)
     # Calls printResults in order to print the results
-    printResults(result)
+    return result
 
 # Main method, takes numbers and exponents via terminal along with desired operation
 def main():
@@ -443,21 +443,25 @@ def main():
         print("Choose operation (0. Quit, 1. Addition, 2. Multiplication, 5. Greater Than, 6. Less Than, 7. Division): ")
         operation = input()
 
+        result = []
+
         # Depending on operation, calls appropriate function
         if (operation == '1'):
-            bigAdd(firstNumber, firstExponent, secondNumber, secondExponent)
+            result = bigAdd(firstNumber, firstExponent, secondNumber, secondExponent)
         elif (operation == '2'):
-            bigMultiply(firstNumber, firstExponent, secondNumber, secondExponent)
+            result = bigMultiply(firstNumber, firstExponent, secondNumber, secondExponent)
         elif (operation == '5'):
-            isGreaterThan(firstNumber, firstExponent, secondNumber, secondExponent)
+            result = isGreaterThan(firstNumber, firstExponent, secondNumber, secondExponent)
         elif (operation == '6'):
-            isLessThan((firstNumber, firstExponent, secondNumber, secondExponent))
+            result = isLessThan((firstNumber, firstExponent, secondNumber, secondExponent))
         elif (operation == '7'):
-            bigDivide(firstNumber, firstExponent, secondNumber, secondExponent)
+            result = bigDivide(firstNumber, firstExponent, secondNumber, secondExponent)
         elif (operation == '0'):
             break
         else:
             print("Please enter a valid option")
+
+        printResults(result)
 
 # Calls main method to start program
 if __name__ == '__main__':
