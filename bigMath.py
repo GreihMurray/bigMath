@@ -440,7 +440,7 @@ def main():
         print("Please enter second exponenet: ")
         secondExponent = input()
 
-        print("Choose operation (0. Quit, 1. Addition, 2. Multiplication, 5. Greater Than, 6. Less Than, 7. Division): ")
+        print("Choose operation (0. Quit, 1. Addition, 2. Multiplication, 4. Division, 5. Greater Than, 6. Less Than): ")
         operation = input()
 
         result = []
@@ -450,12 +450,12 @@ def main():
             result = bigAdd(firstNumber, firstExponent, secondNumber, secondExponent)
         elif (operation == '2'):
             result = bigMultiply(firstNumber, firstExponent, secondNumber, secondExponent)
+        elif (operation == '4'):
+            result = bigDivide(firstNumber, firstExponent, secondNumber, secondExponent)
         elif (operation == '5'):
             result = isGreaterThan(firstNumber, firstExponent, secondNumber, secondExponent)
         elif (operation == '6'):
             result = isLessThan((firstNumber, firstExponent, secondNumber, secondExponent))
-        elif (operation == '7'):
-            result = bigDivide(firstNumber, firstExponent, secondNumber, secondExponent)
         elif (operation == '0'):
             break
         else:
