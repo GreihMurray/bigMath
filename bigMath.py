@@ -15,28 +15,37 @@ def printProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, 
     if iteration == total:
         print()
 
+# Method to convert results to scientific notation to increase readability
+# Accepts a list as an argument and prints the scientific notation
 def convertToScientifcNotation(passedIn):
+    # reverses the list
     reversed = reverseList(passedIn)
     numOfZeros = 0
+    # gets the total exponent for the scientific notation
     exponent = len(reversed) - 1
 
+    # Counts all trailing zeros in the list
     for digit in reversed:
         if int(digit) != 0:
             break
         else:
             numOfZeros += 1
 
+    # Removes all trailing zeros from the list
     for i in range(0, numOfZeros):
         reversed.pop(0)
 
+    # Reverses list again and adds decimal in the right place
     result = reverseList(reversed)
     result.insert(1, '.')
 
     stringAnswer = ''
 
+    # Converts the list to a single string variable
     for digit in result:
         stringAnswer += str(digit)
 
+    # Prints the answer in scientific notation
     print(stringAnswer, 'x10^', exponent, sep='', end='\n')
 
 # Can be used to print results from other methods
