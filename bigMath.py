@@ -15,12 +15,38 @@ def printProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, 
     if iteration == total:
         print()
 
+def convertToScientifcNotation(passedIn):
+    reversed = reverseList(passedIn)
+    numOfZeros = 0
+    exponent = len(reversed) - 1
+
+    for digit in reversed:
+        if int(digit) != 0:
+            break
+        else:
+            numOfZeros += 1
+
+    for i in range(0, numOfZeros):
+        reversed.pop(0)
+
+    result = reverseList(reversed)
+    result.insert(1, '.')
+
+    stringAnswer = ''
+
+    for digit in result:
+        stringAnswer += str(digit)
+
+    print(stringAnswer, 'x10^', exponent, sep='', end='\n')
+
 # Can be used to print results from other methods
 # Accepts list as argument
 def printResults(passedIn):
     for i in passedIn:
         print(i, end="")
     print(" ")
+
+    convertToScientifcNotation(passedIn)
 
 
 # Converts number and exponent to a list which represents the numerical value
@@ -230,7 +256,6 @@ def bigMultiply(firstNumber, firstExponent, secondNumber, secondExponent):
         # Reverses the list so it is the right way around
         result = reverseList(holdToAdd)
         # Sends the result to printResults
-        printResults(result)
     elif len(reversedFirstNumList) < len(reversedSecondNumList):
         printProgressBar(0, (len(reversedSecondNumList) - (zerosInListTwo-1)), prefix='Progress:', suffix='Complete', length=50)
         # Multiplies each digit of the shorter list by each digit in the longer list before moving on
@@ -265,7 +290,7 @@ def bigMultiply(firstNumber, firstExponent, secondNumber, secondExponent):
         # Reverses result so it is the right way around
         result = reverseList(holdToAdd)
         # Sends result to printResults
-        return result
+    return result
 
 
 # Determines if the first number is greater than the second
