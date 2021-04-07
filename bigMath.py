@@ -45,8 +45,7 @@ def convertToScientifcNotation(passedIn):
     for digit in result:
         stringAnswer += str(digit)
 
-    # Prints the answer in scientific notation
-    print(stringAnswer, 'x10^', exponent, sep='', end='\n')
+    return stringAnswer, exponent
 
 # Can be used to print results from other methods
 # Accepts list as argument
@@ -55,7 +54,10 @@ def printResults(passedIn):
         print(i, end="")
     print(" ")
 
-    convertToScientifcNotation(passedIn)
+    stringAnswer, exponent = convertToScientifcNotation(passedIn)
+
+    # Prints the answer in scientific notation
+    print(stringAnswer, 'x10^', exponent, sep='', end='\n')
 
 
 # Converts number and exponent to a list which represents the numerical value
