@@ -453,6 +453,59 @@ def bigDivide(firstNumber, firstExponent, secondNumber, secondExponent):
     # Calls printResults in order to print the results
     return result
 
+def combine(list):
+    str1 = ''
+
+    for element in list:
+        str1 += str(element)
+
+    return str1
+
+def splitter(passedIn):
+    str1 = str(passedIn)
+    result = []
+
+    for ele in str1:
+        result.append(int(ele))
+
+    return result
+
+def bigSubtract(firstNumber, firstExponent, secondNumber, secondExponent):
+    difInLength = 0
+    numOfZerosOne = int(firstExponent) - len(str(firstNumber))+2
+    numOfZerosTwo = int(secondExponent) - len(str(secondNumber))+2
+
+    numOne = convertToDecimal(firstNumber, firstExponent)
+    numTwo = convertToDecimal(secondNumber, secondExponent)
+
+    result = []
+
+    if firstExponent > secondExponent:
+        difInLength = int(firstExponent) - int(secondExponent)
+    else:
+        difInLength = int(secondExponent) - int(firstExponent)
+
+    if(difInLength <= 13):
+        for i in range(0, numOfZerosTwo):
+            numOne.pop()
+            numTwo.pop()
+
+        numOne = int(combine(numOne))
+        numTwo = int(combine(numTwo))
+
+        ans = numOne - numTwo
+
+        result = splitter(ans)
+
+        if(ans > 0):
+            for i in range(0, numOfZerosTwo):
+                result.append(0)
+
+        return result
+
+    return [0]
+
+
 # Main method, takes numbers and exponents via terminal along with desired operation
 def main():
     while (True):
@@ -467,7 +520,7 @@ def main():
         print("Please enter second exponenet: ")
         secondExponent = input()
 
-        print("Choose operation (0. Quit, 1. Addition, 2. Multiplication, 4. Division, 5. Greater Than, 6. Less Than): ")
+        print("Choose operation (0. Quit, 1. Addition, 2. Multiplication, 3. Subtraction, 4. Division, 5. Greater Than, 6. Less Than): ")
         operation = input()
 
         result = []
@@ -483,6 +536,10 @@ def main():
         elif (operation == '2'):
             startTime = time.clock()
             result = bigMultiply(firstNumber, firstExponent, secondNumber, secondExponent)
+            endTime = time.clock()
+        elif (operation == '3'):
+            startTime = time.clock()
+            result = bigSubtract(firstNumber, firstExponent, secondNumber, secondExponent)
             endTime = time.clock()
         elif (operation == '4'):
             startTime = time.clock()
