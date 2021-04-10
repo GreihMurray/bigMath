@@ -1,5 +1,8 @@
 # Method to reverse all elements in a list
 # Accepts a list as an argument and returns the reversed version of that list
+import time
+
+
 def reverseList(passedIn):
     reversedList = []
     for i in reversed(passedIn):
@@ -267,7 +270,7 @@ def bigMultiply(firstNumber, firstExponent, secondNumber, secondExponent):
         # Reverses the list so it is the right way around
         result = reverseList(holdToAdd)
         # Sends the result to printResults
-    elif len(reversedFirstNumList) < len(reversedSecondNumList):
+    else:
         printProgressBar(0, (len(reversedSecondNumList) - (zerosInListTwo-1)), prefix='Progress:', suffix='Complete', length=50)
         # Multiplies each digit of the shorter list by each digit in the longer list before moving on
         for i in range (zerosInListTwo-1, len(reversedSecondNumList)):
@@ -469,21 +472,36 @@ def main():
 
         result = []
 
+        startTime = 0
+        endTime = 0
+
         # Depending on operation, calls appropriate function
         if (operation == '1'):
+            startTime = time.clock()
             result = bigAdd(firstNumber, firstExponent, secondNumber, secondExponent)
+            endTime = time.clock()
         elif (operation == '2'):
+            startTime = time.clock()
             result = bigMultiply(firstNumber, firstExponent, secondNumber, secondExponent)
+            endTime = time.clock()
         elif (operation == '4'):
+            startTime = time.clock()
             result = bigDivide(firstNumber, firstExponent, secondNumber, secondExponent)
+            endTime = time.clock()
         elif (operation == '5'):
+            startTime = time.clock()
             result = isGreaterThan(firstNumber, firstExponent, secondNumber, secondExponent)
+            endTime = time.clock()
         elif (operation == '6'):
+            startTime = time.clock()
             result = isLessThan((firstNumber, firstExponent, secondNumber, secondExponent))
+            endTime = time.clock()
         elif (operation == '0'):
             break
         else:
             print("Please enter a valid option")
+
+        print('Calculation completed in ', (endTime - startTime)*1000, ' milliseconds', sep='')
 
         printResults(result)
 
