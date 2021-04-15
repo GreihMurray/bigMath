@@ -2,8 +2,8 @@ import bigMath
 import time
 
 start = time.clock()
-numberOne = bigMath.convertToDecimal('1.234', '500000')
-numberTwo = bigMath.convertToDecimal('1.234', '500000')
+numberOne = bigMath.convertToDecimal('1.234', '4000')
+numberTwo = bigMath.convertToDecimal('1.234', '4000')
 num = ''
 num2 = ''
 
