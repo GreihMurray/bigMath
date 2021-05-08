@@ -1,8 +1,7 @@
-# Method to reverse all elements in a list
 # Accepts a list as an argument and returns the reversed version of that list
 import time
 
-
+# Method to reverse all elements in a list
 def reverseList(passedIn):
     reversedList = []
     for i in reversed(passedIn):
